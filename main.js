@@ -6,6 +6,7 @@ var gameData = {
     snowPerClick: 1,
     snowBrick:0,
     snowPerBrick: 4,
+    brickTime:  2,
 }
 
 function updateTicker(newText) {
@@ -46,7 +47,7 @@ function makeBrick() {
         loadingBar.value = 0;
         let progress = 0;
         const interval = setInterval(function() {
-            progress += 2; // Increase the progress by 2 every 100ms (for 5 seconds)
+            progress += gameData.brickTime; // Increase the progress by 2 every 100ms (for 5 seconds)
             loadingBar.value = progress;
 
             // When the progress reaches 100, complete the process
