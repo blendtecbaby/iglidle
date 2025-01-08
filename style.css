@@ -1,0 +1,34 @@
+p {
+    font-size: 20px;
+    font-family: Verdana;
+    color: white;
+}
+
+
+#ticker {
+    color: whitesmoke;
+    width: 40%;
+    height: 200px;
+    border: 1px solid #524f4f;
+    padding: 10px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    font-size: 30px;
+    font-family: monospace;
+    background-color: rgb(39, 39, 39);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+#brickBar{
+   width: 20%; 
+   height: 20px; 
+   display: none;
+}
+
+.square{
+    height: 32px;
+    width: 32px;
+    background-color: rgb(255, 255, 255);
+}

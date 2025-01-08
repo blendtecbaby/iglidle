@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incremental Igloo</title>
+</head>
+<body style="background-color: rgb(39, 39, 39);"   onload="updateCount()">
+<div id="ticker"></div>
+<p id="snowGrabbed">0 Snowballs collected</p>
+<p id="snowBricks">0 Bricks made</p>
+<button id="snowButton" onclick="grabSnow()">Collect Snow</button>
+<button id="brickButton" onclick="makeBrick()">Make Brick</button>
+<div class="square"></div>
+<progress id="brickBar" value="0" max="100"></progress>
+
+<script src="main.js" charset="UTF-8" type="text/javascript"></script>
+</body>
+</html>
