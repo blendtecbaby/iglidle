@@ -6,7 +6,8 @@ var gameData = {
     snowPerClick: 1,
     snowBrick:0,
     snowPerBrick: 4,
-    brickTime:  2,
+    brickMax: 5,
+    brickTime:  10,
 }
 
 function updateTicker(newText) {
@@ -22,6 +23,7 @@ function updateTicker(newText) {
 
 function updateCount(){
     if (gameData.snow >= 4){
+    
         if (document.getElementById("brickButton").style.visibility == 'hidden')
         updateTicker("You can now make bricks.");
         document.getElementById("brickButton").style.visibility='visible';
@@ -35,33 +37,48 @@ ticker.innerHTML += "You are surrounded by snow." + '\n';
 function grabSnow() {
     gameData.snow +=gameData.snowPerClick;
     updateCount();
-
+    updateTicker("snow grabbed")
 }
 
 function makeBrick() {
+    // Check if brick limit is reached
+    if (gameData.snowBrick >= gameData.brickMax) {
+        updateTicker("You only have room for " + gameData.brickMax + " bricks.");
+        document.getElementById("brickButton").disabled = true; // Disable the button
+        return;
+    }
+
+    // Check if there's enough snow to make a brick
     if (gameData.snow >= gameData.snowPerBrick) {
-        //disable button
+        // Disable button while brick-making process occurs
         document.getElementById("brickButton").disabled = true;
+
         const loadingBar = document.getElementById("brickBar");
         loadingBar.style.display = 'block';
         loadingBar.value = 0;
+
         let progress = 0;
-        const interval = setInterval(function() {
-            progress += gameData.brickTime; // Increase the progress by 2 every 100ms (for 5 seconds)
+        const interval = setInterval(function () {
+            progress += gameData.brickTime; // Increase progress based on brickTime
             loadingBar.value = progress;
 
-            // When the progress reaches 100, complete the process
             if (progress >= 100) {
                 clearInterval(interval);
 
-                // Deduct snow and add a snow brick
+                // Deduct snow and add a brick
                 gameData.snow -= gameData.snowPerBrick;
                 gameData.snowBrick += 1;
                 updateCount();
 
-                // Hide the loading bar and re-enable the button
+                // Hide the loading bar
                 loadingBar.style.display = 'none';
-                document.getElementById("brickButton").disabled = false;
+
+                // Re-enable the button if brick limit is not yet reached
+                if (gameData.snowBrick < gameData.brickMax) {
+                    document.getElementById("brickButton").disabled = false;
+                } else {
+                    updateTicker("You only have room for " + gameData.brickMax + " bricks.");
+                }
             }
         }, 100); // Update every 100ms
     }
